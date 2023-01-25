@@ -7,10 +7,12 @@ independent_news/venv
 independent_news/config.py
 
 news_crawler/venv
-
+news_crawler/.idea
 news_crawler/utils/config_news.py
 news_crawler/utils/scraper_tools.py
 news_crawler/utils/country_scraper.py
 news_crawler/chromedriver
 news_crawler/csv_news
+news_crawler/utils/config_news.py
+ news_crawler/utils/__pycache__
 
