@@ -1,5 +1,16 @@
 independent_news/.idea
 
-independent_news/env
+independent_news/venv
+
+# independent_news/env/lib64
 
 independent_news/config.py
+
+news_crawler/venv
+
+news_crawler/utils/config_news.py
+news_crawler/utils/scraper_tools.py
+news_crawler/utils/country_scraper.py
+news_crawler/chromedriver
+news_crawler/csv_news
+

@@ -27,6 +27,3 @@ def get_current_day_news():
         response.append(news_object)
 
     return response
-
-
-# get_current_day_news()
