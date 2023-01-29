@@ -15,6 +15,10 @@ class DB:
         self.connection = psycopg2.connect(requirements)
         self.cursor = self.connection.cursor()
 
+    def insert_many(self, query, data):
+        self.cursor.executemany(query, data)
+        return self.cursor
+
     def make_request(self, request):
         self.cursor.execute(request)
         self.connection.commit()

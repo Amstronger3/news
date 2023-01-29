@@ -1,0 +1,28 @@
+version: "3"
+services:
+  db-psql:
+    image: postgres:12
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+  news_crawler:
+    image: news_crawler:1.0
+    build:
+      dockerfile: Dockerfile
+      context: news_crawler/.
+    container_name: news_crawler
+    depends_on:
+      - db-psql
+    env_file:
+      - .env
+
+volumes:
+  db-data:
+    driver: local
+
+#    command:
+#      - bash -c "python usa_today.py"
+#  news-fornt:
+#  news_back:
