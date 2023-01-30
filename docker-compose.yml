@@ -18,6 +18,18 @@ services:
     env_file:
       - .env
 
+  independent_news:
+    image: independent_news
+    build:
+      dockerfile: Dockerfile
+      context: independent_news/.
+    container_name: independent_news
+    depends_on:
+      - news_crawler
+    env_file:
+      - .env
+
+
 volumes:
   db-data:
     driver: local
@@ -25,4 +37,4 @@ volumes:
 #    command:
 #      - bash -c "python usa_today.py"
 #  news-fornt:
-#  news_back:
+

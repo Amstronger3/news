@@ -5,8 +5,6 @@ ENV PYTHONUNBUFFERED 1
 
 RUN python -m pip install --upgrade pip
 RUN apt update & apt upgrade
-#RUN mkdir -p /usr/news/news_crawler
-RUN mkdir -p /usr/news/news_crawler/csv_news
 
 COPY . /usr/news/news_crawler
 WORKDIR /usr/news/news_crawler
