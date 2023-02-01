@@ -7,27 +7,40 @@ services:
     env_file:
       - .env
 
-  news_crawler:
-    image: news_crawler:1.0
+#  news_crawler:
+#    image: news_crawler:1.0
+#    build:
+#      dockerfile: Dockerfile
+#      context: news_crawler/.
+#    container_name: news_crawler
+#    depends_on:
+#      - db-psql
+#    env_file:
+#      - .env
+
+  independent_news:
+    image: independent_news
     build:
-      dockerfile: Dockerfile
-      context: news_crawler/.
+      context: ./independent_news
+#      dockerfile: Dockerfile
+#      context: independent_news/.
+    container_name: independent_news
+    depends_on:
+      - db-psql
+    env_file:
+      - .env
+    command: ["python", "run.py"]
+
+  news_crawler:
+    image: news_crawler
+    build:
+      context: ./independent_news
     container_name: news_crawler
     depends_on:
       - db-psql
     env_file:
       - .env
-
-  independent_news:
-    image: independent_news
-    build:
-      dockerfile: Dockerfile
-      context: independent_news/.
-    container_name: independent_news
-    depends_on:
-      - news_crawler
-    env_file:
-      - .env
+    command: ["python", 'news_crawler/usa_today.py']
 
 
 volumes:

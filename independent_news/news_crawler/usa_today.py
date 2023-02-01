@@ -1,13 +1,18 @@
 import datetime
-import os
 import time
 
-from utils import config_news
-from utils.connection_db import DB as db
+import os, sys, inspect
+
+current_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parent_dir = os.path.dirname(current_dir)
+sys.path.insert(0, parent_dir)
+from connection_db import DB as db
+from config import requirements_for_news_db, source_urls
+
 from utils.scraper_tools import Scraper
 
 SOURCE_NAME = 'USA Today'
-URL = config_news.source_urls[SOURCE_NAME]
+URL = source_urls[SOURCE_NAME]
 COUNTRY = 'USA'
 file_name = os.path.basename(__file__).split('.')[0]
 PATH = f'{os.getcwd()}/csv_news'
@@ -53,12 +58,12 @@ def scrap_news() -> list:
                               header_english,
                               country))
 
-    print(news_data)
+    print('amount_news:', len(news_data))
     return news_data
 
 
 def load_to_db(scraped_data):
-    connection = db(config_news.requirements_for_news_db)
+    connection = db(requirements_for_news_db)
     query = f"""
     INSERT INTO articles (scrap_date, published_date, source_link, source_name, author, text_article, header_original,
                     header_english, country) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
@@ -66,6 +71,7 @@ def load_to_db(scraped_data):
     connection.insert_many(query, scraped_data)
     connection.drop_duplicates()
     connection.close_connection()
+    print('load news success!')
 
 
 def main():

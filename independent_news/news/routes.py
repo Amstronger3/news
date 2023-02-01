@@ -1,5 +1,5 @@
 from news import app
-from db_connection import DB
+from connection_db import DB
 from config import requirements_for_news_db
 
 
