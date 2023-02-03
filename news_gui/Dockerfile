@@ -17,10 +17,3 @@ COPY . /usr/news/news_gui/
 
 # Build the Vue.js application in the container
 RUN npm run build
-
-# Expose the port used by the application
-# EXPOSE 8080
-
-# Set the command to run when the container starts
-# CMD [ "npm", "run", "serve"]
-# CMD [ "http-server", "dist" ]
