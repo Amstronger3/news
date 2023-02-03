@@ -7,28 +7,17 @@ services:
     env_file:
       - .env
 
-#  news_crawler:
-#    image: news_crawler:1.0
-#    build:
-#      dockerfile: Dockerfile
-#      context: news_crawler/.
-#    container_name: news_crawler
-#    depends_on:
-#      - db-psql
-#    env_file:
-#      - .env
-
   independent_news:
     image: independent_news
     build:
       context: ./independent_news
-#      dockerfile: Dockerfile
-#      context: independent_news/.
     container_name: independent_news
     depends_on:
       - db-psql
     env_file:
       - .env
+    ports:
+      - "5000:5000"
     command: ["python", "run.py"]
 
   news_crawler:
@@ -42,12 +31,20 @@ services:
       - .env
     command: ["python", 'news_crawler/usa_today.py']
 
+  news_gui:
+    image: news_gui
+    build: 
+      context: ./news_gui
+    container_name: news_gui
+    depends_on:
+      - news_crawler
+    ports:
+      - "8080:8080"
+    command: [ "http-server", "dist" ]
 
 volumes:
   db-data:
     driver: local
 
-#    command:
-#      - bash -c "python usa_today.py"
-#  news-fornt:
+
 

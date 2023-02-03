@@ -1,17 +1,20 @@
 independent_news/.idea
-
 independent_news/venv
-
 independent_news/config.py
+independent_news/__pycache__/
 
-news_crawler/venv
-news_crawler/.idea
-news_crawler/utils/config_news.py
-news_crawler/utils/country_scraper.py
-news_crawler/chromedriver
-news_crawler/csv_news
-news_crawler/utils/config_news.py
-news_crawler/utils/__pycache__
+.idea
+independent_news/news_crawler/.idea
+independent_news/news_crawler/chromedriver
+independent_news/news_crawler/utils/country_scraper.py
+independent_news/news_crawler/__pycache__/
+independent_news/news_crawler/utils/__pycache__/
+
+independent_news/news/__pycache__/
+
+
+
+news_gui/node_modules
 
 .env
 
